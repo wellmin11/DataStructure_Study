@@ -61,23 +61,33 @@ int GetListSize(List* list)
 // i 번째의 노드를 지운다 (지울게 없다면 -1, 지운게 성공하면 0 반환)
 int RemoveNodeFromList(List* list, int i)
 {
-	Node* node = NULL;
-	if (listSize == 0 || listSize <= i) return -1;
-	if (i == 0) {
-		node = list->Head;
-		list->Head = list->Head->Next;
-		free(node);
-	}
-	else {
-		for (int j = 0; j < i - 1; j++)
-		{
-			node = list->Head;
-			list->Head = list->Head->Next;
+	if (list->Head == NULL || i < 0) return -1;
+	if (i == 1) {
+		if (list->Head == list->Tail) {
+			list->Head = NULL;
+			list->Tail = NULL;
+			free(list->Head);
+			free(list->Tail);
 		}
-		node->Next = list->Head->Next->Prev;
-		list->Head->Next->Prev = node->Next;
-		free(node);
+		else {
+			list->Head = list->Head->Next;
+			list->Head->Prev = NULL;
+			free(list->Head->Prev);
+		}
+		listSize = 0;
+		return 0;
 	}
+	
+	Node* current = (Node*)malloc(sizeof(Node));
+	current = list->Head;
+	while (current != NULL && --i >= 0)
+	{
+		current = current->Next;
+	}
+	current->Next->Prev = current->Prev;
+	current->Prev->Next = current->Next;
+	listSize--;
+	free(current);
 	return 0;
 }
 
