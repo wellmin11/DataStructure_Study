@@ -123,9 +123,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CircularLinkedList.h" />
     <ClInclude Include="DoublyLInkedList.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CircularLinkedList.c" />
     <ClCompile Include="DoublyLinkedList.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

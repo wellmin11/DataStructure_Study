@@ -15,15 +15,19 @@ int InitList(CircularList* clist)
 int AddNode(CircularList* clist, Node* element, int data)
 {
 	Node* node = (Node *)malloc(sizeof(Node));
-	
 	if (node == NULL) return -1;
-
 	node->Data = data;
 	
-	element = clist->Head;
-	while (element->Next != NULL)
-		element = element->Next;
-	element->Next = node;
+	if (clist->Head->Next == NULL) {
+		clist->Head = node;
+	}
+	else {
+		element = clist->Head;
+		while (element->Next != clist->Head)
+			element = element->Next;
+		element->Next = node;
+		node->Next = clist->Head;
+	}
 
 	return 0;
 }
@@ -31,8 +35,13 @@ int AddNode(CircularList* clist, Node* element, int data)
 // element node 를 찾는다, 찾을시 0, 없을시 -1
 int FindNode(CircularList* clist, Node* element)
 {
-	while (clist->Head->Next != NULL) {
-		if (clist->Head == element)
+	Node* node = (Node*)malloc(sizeof(Node));
+	node = clist->Head;
+
+	if (node->Next == NULL && node == element) return 0;
+	
+	while (node->Next != clist->Head) {
+		if (node == element)
 			return  0;
 	}
 	return -1;
@@ -44,14 +53,13 @@ int RemoveNode(CircularList* clist, Node* element)
 	Node* node = (Node *)malloc(sizeof(Node));
 	node = clist->Head;
 
-	if (clist->Head == element) {
+	if (clist->Head == element) {		
 		clist->Head = clist->Head->Next;
-		clist->Head = NULL;
-		free(clist->Head);
+		free(node);
 		return 0;
 	}
 
-	while (node->Next != NULL) {
+	while (node->Next != clist->Head) {
 		if (node->Next == element) {
 			node = NULL;
 			free(node);
@@ -70,7 +78,7 @@ int DestroyList(CircularList* clist)
 	Node* node = (Node*)malloc(sizeof(Node));
 	node = clist->Head;
 	
-	while (node->Next != NULL) {
+	while (node->Next != clist->Head) {
 		node = node->Next;
 		node = NULL;
 		free(node);
