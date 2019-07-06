@@ -8,7 +8,7 @@
 // 스택을 초기화해준다.성공시 0
 int InitStack(Stack* stack)
 {
-	if (stack != NULL && stack->Head->Next != NULL)  return -1;
+	if (stack == NULL)  return -1;
 	stack->Head = NULL;
 	return 0;
 }
@@ -16,15 +16,19 @@ int InitStack(Stack* stack)
 //정수형 데이터를 스텍에 넣는다 성공시 1 실패시 -1
 int Push(Stack* stack, int Data)
 {
-	if (stack->Head == NULL)
-		return -1;
-	Node* node = (Node*)malloc(sizeof(Node));
-	node->Data = Data;
+	if (stack == NULL) return -1;
 
-	while (stack->Head->Next != NULL) {
-		stack->Head = stack->Head->Next;
+	Node* new_node = (Node*)malloc(sizeof(Node));
+	new_node->Data = Data;
+	printf("add node data %d \n", Data);
+
+	if (stack->Head == NULL) {
+		stack->Head = new_node;
 	}
-	stack->Head->Next = node;
+	else {
+		new_node->Next = stack->Head;
+		stack->Head = new_node;
+	}
 
 	return 0;
 }
@@ -38,9 +42,7 @@ int Pop(Stack* stack)
 	Node* node = (Node*)malloc(sizeof(Node));
 	node = stack->Head;
 
-	while (node->Next != NULL) {
-		node = node->Next;
-	}
+	stack->Head = stack->Head->Next;
 	data = node->Data;
 	free(node);
 
@@ -50,11 +52,7 @@ int Pop(Stack* stack)
 //Top 위치에 있는 정수형 데이타를 반환한다. 성공시 1 , 실패시 -1(아무것도 없을때)
 int Top(Stack* stack)
 {
-	if (stack->Head == NULL) return -1;
-	
-	while (stack->Head->Next != NULL) {
-		stack->Head = stack->Head->Next;
-	}
+	if (stack == NULL) return -1;
 	return stack->Head->Data;
 }
 
@@ -70,5 +68,28 @@ int Destroy(Stack* stack)
 		free(node);
 	}
 
+	return 0;
+}
+
+int main(void)
+{
+	Stack* stack = (Stack*)malloc(sizeof(Stack));
+	InitStack(&stack);
+	printf("Test Start! \n");
+
+	for (int i = 1; i < 10; i++)
+	{
+		Push(&stack, i);
+	}
+
+	printf("Push Function Complete! \n");
+
+	for (int i = 1; i < 10; i++)
+	{
+		int num = Pop(&stack);
+		printf("%d \n", num);
+	}
+
+	printf("Pop Function Complete! \n");
 	return 0;
 }

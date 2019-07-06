@@ -1,6 +1,7 @@
 #include "CircularLinkedList.h"
 #include <stdio.h>
 
+#if 0
 // 환형 리스트 초기화, 성공시 0 반환, 실패시 -1 (이미 초기화가 된 노드의 경우와 한개이상의 노드가 존재하는 경우 -1 반환)
 int InitList(CircularList* clist)
 {
@@ -86,3 +87,4 @@ int DestroyList(CircularList* clist)
 
 	return 0;
 }
+#endif
