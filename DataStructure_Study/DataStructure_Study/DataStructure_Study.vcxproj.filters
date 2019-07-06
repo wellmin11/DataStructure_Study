@@ -21,12 +21,18 @@
     <ClInclude Include="CircularLinkedList.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Queue.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DoublyLinkedList.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CircularLinkedList.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Queue.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -125,10 +125,12 @@
   <ItemGroup>
     <ClInclude Include="CircularLinkedList.h" />
     <ClInclude Include="DoublyLInkedList.h" />
+    <ClInclude Include="Queue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CircularLinkedList.c" />
     <ClCompile Include="DoublyLinkedList.c" />
+    <ClCompile Include="Queue.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
