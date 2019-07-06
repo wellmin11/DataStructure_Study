@@ -1,6 +1,7 @@
 #include "DoublyLinkedList.h"
 #include <stdlib.h>
 
+#if 0 
 static int listSize = 0;
 
 //리스트를 초기화한다 
@@ -306,3 +307,4 @@ int AddList(List* list1, List* list2, int i)
 	return 0;
 
 }
+#endif
